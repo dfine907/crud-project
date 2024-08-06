@@ -1,18 +1,39 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 
 function CreateUser() {
   const [company, setCompany] = useState('')
   const [website, setWebsite] = useState('')
   const [contact, setContact] = useState('')
 
-  const submitHandler = (event) => {
-    event.preventDefault()
-    axios.post("http://localhost:8080/createUser", {company, website, contact})
-    .then(result => console.log(result))
-    .catch(error => console.log(error))
-  }
+  const navigate = useNavigate()
 
+  // const submitHandler = (event) => {
+  //   event.preventDefault()
+  //   axios.post("http://localhost:8080/createUser", {company, website, contact})
+  //   .then(result => console.log(result))
+  //   .catch(error => console.log(error))
+  // }
+
+  const submitHandler = async (event) => {
+    event.preventDefault()
+    try {
+      const result = await axios.post(
+        'http://localhost:8080/createUser',
+        {
+          company,
+          website,
+          contact,
+        }
+      )
+      console.log(result)
+      navigate('/success')
+    } catch (error) {
+      console.error('Error creating user:', error)
+    }
+  }
 
   return (
     <>
@@ -49,7 +70,7 @@ function CreateUser() {
                 onChange={(event) => setContact(event.target.value)}
               />
             </div>
-            <button className='btn btn-success'>Submit</button>
+            <button className="btn btn-success">Submit</button>
           </form>
         </div>
       </div>

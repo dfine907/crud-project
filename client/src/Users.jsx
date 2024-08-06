@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Users() {
-  const [users, setUsers] = useState([
-    {
-      Company: 'PulseTech',
-      Website: 'http://pulsetech.com',
-      Contact: 'Gino Rossi',
-    },
-  ])
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/')
+      .then((result) => setUsers(result.data))
+      .catch((error) => console.log(error))
+  }, [])
   return (
     <>
       <div className="d-flex vh-100 bg-info justify-content-center align-items-center">
@@ -27,19 +29,23 @@ export default function Users() {
             </thead>
 
             <tbody>
-              {users.map((user) => {
+              {
+              users.map((user) => {
                 return (
                   <tr key={Math.random()}>
-                    <td>{user.Company}</td>
-                    <td>{user.Website}</td>
-                    <td>{user.Contact}</td>
+                    <td>{user.company}</td>
+                    <td>{user.website}</td>
+                    <td>{user.contact}</td>
                     <td>
-                    <Link to='/update'className="btn btn-success" >Update</Link>
-                      <button>Delete</button>
+                      <Link to="/update" className="btn btn-success">
+                        Update
+                      </Link>
+                      <button className="btn btn-danger" >Delete</button>
                     </td>
                   </tr>
                 )
-              })}
+              })
+              }
             </tbody>
           </table>
         </div>
