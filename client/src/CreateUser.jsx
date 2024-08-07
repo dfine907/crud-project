@@ -29,7 +29,7 @@ function CreateUser() {
         }
       )
       console.log(result)
-      navigate('/success')
+      navigate('/')
     } catch (error) {
       console.error('Error creating user:', error)
     }

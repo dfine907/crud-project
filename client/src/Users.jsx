@@ -11,6 +11,7 @@ export default function Users() {
       .then((result) => setUsers(result.data))
       .catch((error) => console.log(error))
   }, [])
+
   return (
     <>
       <div className="d-flex vh-100 bg-info justify-content-center align-items-center">
@@ -29,23 +30,23 @@ export default function Users() {
             </thead>
 
             <tbody>
-              {
-              users.map((user) => {
+              {users.map((user) => {
                 return (
-                  <tr key={Math.random()}>
+                  <tr key={user._id}>
                     <td>{user.company}</td>
                     <td>{user.website}</td>
                     <td>{user.contact}</td>
                     <td>
-                      <Link to="/update" className="btn btn-success">
+                      <Link to= {`/update/${user._id}` } className="btn btn-success">
                         Update
                       </Link>
-                      <button className="btn btn-danger" >Delete</button>
+                      <button className="btn btn-danger">
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 )
-              })
-              }
+              })}
             </tbody>
           </table>
         </div>
