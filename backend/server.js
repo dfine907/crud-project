@@ -18,10 +18,10 @@ app.get('/', (req, res) => {
     .catch((error) => res.status(500).json({ error: error.message }))
 })
 
-app.get('/getUser:id', (req, res) => {
+app.get('/getUser/:id', (req, res) => {
   const id = req.params.id
-  UserModel.findById({ _id:id})
-    .then((users) => res.json(users))
+  UserModel.findById(id)
+    .then((user) => res.json(user))
     .catch((error) => res.status(500).json({ error: error.message }))
 })
 
@@ -32,6 +32,17 @@ app.post('/createUser', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message })
   }
+})
+
+app.put('/updateUser/:id', (req, res) => {
+  const id = req.params.id
+  UserModel.findByIdAndUpdate(id, {
+    company: req.body.company,
+    website: req.body.website,
+    contact: req.body.contact,
+  })
+    .then((user) => res.json(user))
+    .catch((error) => res.status(500).json({ error: error.message }))
 })
 
 app.listen(port, () => {
