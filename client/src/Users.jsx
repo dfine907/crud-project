@@ -12,6 +12,13 @@ export default function Users() {
       .catch((error) => console.log(error))
   }, [])
 
+
+  const deleteHandler = (id) => {
+    axios.delete(`/deleteUser/${id}`)
+    .then((result) => console.log(result))
+      .catch((error) => console.log(error))
+  }
+
   return (
     <>
       <div className="d-flex vh-100 bg-info justify-content-center align-items-center">
@@ -37,10 +44,16 @@ export default function Users() {
                     <td>{user.website}</td>
                     <td>{user.contact}</td>
                     <td>
-                      <Link to= {`/update/${user._id}` } className="btn btn-success">
+                      <Link
+                        to={`/update/${user._id}`}
+                        className="btn btn-success"
+                      >
                         Update
                       </Link>
-                      <button className="btn btn-danger">
+                      <button
+                        className="btn btn-danger"
+                        onClick={(event) => deleteHandler(user._id)}
+                      >
                         Delete
                       </button>
                     </td>

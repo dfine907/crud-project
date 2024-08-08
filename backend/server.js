@@ -36,13 +36,34 @@ app.post('/createUser', async (req, res) => {
 
 app.put('/updateUser/:id', (req, res) => {
   const id = req.params.id
-  UserModel.findByIdAndUpdate(id, {
-    company: req.body.company,
-    website: req.body.website,
-    contact: req.body.contact,
-  })
+  UserModel.findByIdAndUpdate(
+    id,
+    {
+      company: req.body.company,
+      website: req.body.website,
+      contact: req.body.contact,
+    },
+    { new: true }
+  )
     .then((user) => res.json(user))
     .catch((error) => res.status(500).json({ error: error.message }))
+})
+
+//
+
+app.delete('/deleteUser/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const user = await UserModel.findByIdAndDelete(id)
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' })
+    }
+
+    res.json({ message: 'User deleted successfully' })
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 })
 
 app.listen(port, () => {
