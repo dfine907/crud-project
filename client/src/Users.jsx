@@ -14,10 +14,15 @@ export default function Users() {
 
 
   const deleteHandler = (id) => {
-    axios.delete(`/deleteUser/${id}`)
-    .then((result) => console.log(result))
-      .catch((error) => console.log(error))
-  }
+  axios.delete(`http://localhost:8080/deleteUser/${id}`)
+    .then((result) => {
+      console.log(result);
+      setUsers(users.filter((user) => {
+        return user._id !== id;
+      })) // Remove the deleted user from the state
+    })
+    .catch((error) => console.log(error))
+}
 
   return (
     <>
