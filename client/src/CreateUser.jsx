@@ -10,13 +10,6 @@ function CreateUser() {
 
   const navigate = useNavigate()
 
-  // const submitHandler = (event) => {
-  //   event.preventDefault()
-  //   axios.post("http://localhost:8080/createUser", {company, website, contact})
-  //   .then(result => console.log(result))
-  //   .catch(error => console.log(error))
-  // }
-
   const submitHandler = async (event) => {
     event.preventDefault()
     try {
@@ -30,6 +23,7 @@ function CreateUser() {
       )
       console.log(result)
       navigate('/')
+      
     } catch (error) {
       console.error('Error creating user:', error)
     }
