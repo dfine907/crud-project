@@ -38,7 +38,7 @@ function CreateUser() {
   return (
     <>
       <div className="d-flex vh-100 bg-info justify-content-center align-items-center">
-        <div className="w-50 bg-white rounded p-3">
+        <div className="shadow-lg w-50 bg-white rounded p-3">
           <form onSubmit={submitHandler}>
             <h2>Add Company</h2>
             <div className="mb-2">

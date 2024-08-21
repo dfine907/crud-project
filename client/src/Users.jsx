@@ -26,8 +26,8 @@ export default function Users() {
 
   return (
     <>
-      <div className="d-flex vh-100 bg-info justify-content-center align-items-center">
-        <div className="w-50 bg-white rounded p-3">
+      <div className="d-flex vh-100 bg-secondary justify-content-center align-items-center">
+        <div className="w-50 shadow-lg bg-white rounded p-3">
           <Link to="/create" className="btn btn-success">
             ADD +
           </Link>
@@ -57,7 +57,7 @@ export default function Users() {
                       </Link>
                       <button
                         className="btn btn-danger"
-                        onClick={(event) => deleteHandler(user._id)}
+                        onClick={() => deleteHandler(user._id)}
                       >
                         Delete
                       </button>

@@ -49,7 +49,6 @@ app.put('/updateUser/:id', (req, res) => {
     .catch((error) => res.status(500).json({ error: error.message }))
 })
 
-//
 
 app.delete('/deleteUser/:id', async (req, res) => {
   try {
