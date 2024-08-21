@@ -12,17 +12,23 @@ mongoose.connect(
   'mongodb+srv://dinafine121:xUhIu2pdGI4DYlwT@cluster0.zlyemip.mongodb.net/'
 )
 
-app.get('/', (req, res) => {
-  UserModel.find({})
-    .then((users) => res.json(users))
-    .catch((error) => res.status(500).json({ error: error.message }))
+app.get('/', async (req, res) => {
+  try {
+    const users = await UserModel.find({})
+    res.json(users)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 })
 
-app.get('/getUser/:id', (req, res) => {
+app.get('/getUser/:id', async (req, res) => {
   const id = req.params.id
-  UserModel.findById(id)
-    .then((user) => res.json(user))
-    .catch((error) => res.status(500).json({ error: error.message }))
+  try {
+    const user = await UserModel.findById(id)
+    res.json(user)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 })
 
 app.post('/createUser', async (req, res) => {
@@ -34,20 +40,24 @@ app.post('/createUser', async (req, res) => {
   }
 })
 
-app.put('/updateUser/:id', (req, res) => {
+app.put('/updateUser/:id', async (req, res) => {
   const id = req.params.id
-  UserModel.findByIdAndUpdate(
-    id,
-    {
-      company: req.body.company,
-      website: req.body.website,
-      contact: req.body.contact,
-    },
-    { new: true }
-  )
-    .then((user) => res.json(user))
-    .catch((error) => res.status(500).json({ error: error.message }))
+  try {
+    const user = await UserModel.findByIdAndUpdate(
+      id,
+      {
+        company: req.body.company,
+        website: req.body.website,
+        contact: req.body.contact,
+      },
+      { new: true }
+    )
+    res.json(user)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 })
+
 
 
 app.delete('/deleteUser/:id', async (req, res) => {
