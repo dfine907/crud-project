@@ -31,16 +31,18 @@ export default function Users() {
     <>
       <div className="d-flex vh-100 bg-secondary justify-content-center align-items-center">
         <div className="w-50 shadow-lg bg-white rounded p-3">
+
           <Link to="/create" className="btn btn-success">
             ADD +
           </Link>
+
           <table className="table">
             <thead>
               <tr>
                 <th>Company</th>
                 <th>Website</th>
                 <th>Contact</th>
-                <th>Action</th>
+                <th>Edit Company</th>
               </tr>
             </thead>
 
@@ -54,10 +56,11 @@ export default function Users() {
                     <td>
                       <Link
                         to={`/update/${user._id}`}
-                        className="btn btn-success"
+                        className="btn btn-success m-1"
                       >
                         Update
                       </Link>
+                      
                       <button
                         className="btn btn-danger"
                         onClick={() => deleteHandler(user._id)}

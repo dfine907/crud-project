@@ -1,10 +1,11 @@
+
+
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function UpdateUser() {
   const { id } = useParams()
-
   const [company, setCompany] = useState('')
   const [website, setWebsite] = useState('')
   const [contact, setContact] = useState('')
